@@ -1,0 +1,39 @@
+<header ng-switch on="$location.path().indexOf('/Movies/new') > -1">
+    <h3 ng-switch-when="true">Create a new Movie</h3>
+    <h3 ng-switch-when="false">View or edit Movie</h3>
+</header>
+<form id="MovieForm" name="MovieForm" class="form-horizontal" role="form">
+    
+
+    <div class="form-group" ng-class="{'has-error': MovieForm.nombre.$invalid}">
+        <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+        <div id="nombreControls" class="col-sm-10">
+            <input id="nombre" name="nombre" type="text" required class="form-control" ng-model="movie.nombre" placeholder="Enter the Movie Nombre"></input>
+            <span class="help-block error" ng-show="MovieForm.nombre.$error.required">required</span> 
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': MovieForm.descripcion.$invalid}">
+        <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
+        <div id="descripcionControls" class="col-sm-10">
+            <input id="descripcion" name="descripcion" type="text" ng-maxlength="2000" class="form-control" ng-model="movie.descripcion" placeholder="Enter the Movie Descripcion"></input>
+            <span class="help-block error" ng-show="MovieForm.descripcion.$error.maxlength">maximum length is 2000</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': MovieForm.imdb.$invalid}">
+        <label for="imdb" class="col-sm-2 control-label">Imdb</label>
+        <div id="imdbControls" class="col-sm-10">
+            <input id="imdb" name="imdb" type="text" class="form-control" ng-model="movie.imdb" placeholder="Enter the Movie Imdb"></input>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveMovie" name="saveMovie" class="btn btn-primary" ng-disabled="isClean() || MovieForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteMovie" name="deleteMovie" class="btn btn-danger" ng-show="movie.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>
